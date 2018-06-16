@@ -16,7 +16,7 @@ const auth0login = accessToken => {
 const updateProfile = profile => {
   return users.findOneAndUpdate(
     {
-      profileId: profile.user_id
+      profileId: profile.profileId
     },
     {
       $set: {
@@ -33,7 +33,7 @@ const generateTokens = user => {
 
   const publicProfile = pick(user.profile, PUBLIC_PROFILE_KEYS)
   publicProfile.id = user.profileId
-  publicProfile.isAdmin = get(user, 'profile.app_metadata.isAdmin', false)
+  publicProfile.isAdmin = user.profile.isAdmin
   const response = tokenManager.createTokens(user.profileId, publicProfile)
   response.profile = publicProfile
   return response
