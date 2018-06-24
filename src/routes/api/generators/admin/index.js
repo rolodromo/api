@@ -4,8 +4,7 @@ const generators = require('../../../../managers/generators')
 const router = express.Router()
 
 const setFeatured = status => (req, res, next) => {
-  generators
-    .setFeatured(req.params.id, status)
+  generators.setFeatured(req.params.id, status)
     .then(update => {
       if (!update.ok) {
         return next(errors.InternalServerError('Error during update'))
@@ -16,8 +15,7 @@ const setFeatured = status => (req, res, next) => {
 }
 
 const setListed = status => (req, res, next) => {
-  generators
-    .setListed(req.params.id, status)
+  generators.setListed(req.params.id, status)
     .then(update => {
       if (!update.ok || !update.nModified) {
         return next(errors.InternalServerError('Error during update'))

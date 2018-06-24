@@ -15,18 +15,14 @@ const createTokens = (profileId, profile) => {
     issuer: aToken.issuer
   })
 
-  const refreshToken = jwt.sign(
-    {
-      profileId,
-      refreshToken: true
-    },
-    secret,
-    {
-      expiresIn: rToken.expiresIn,
-      audience: aToken.audience,
-      issuer: aToken.issuer
-    }
-  )
+  const refreshToken = jwt.sign({
+    profileId,
+    refreshToken: true
+  }, secret, {
+    expiresIn: rToken.expiresIn,
+    audience: aToken.audience,
+    issuer: aToken.issuer
+  })
 
   return { accessToken, refreshToken, expiresIn }
 }

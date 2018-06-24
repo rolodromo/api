@@ -14,6 +14,7 @@ const schema = {
         picture: 'string'
       }
       // required: ['id', 'name']
+
     },
     parent: 'string',
     featured: 'boolean',

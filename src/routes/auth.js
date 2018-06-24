@@ -19,8 +19,7 @@ router.post('/login', (req, res, next) => {
     return next(errors.UnauthorizedError('Missing accessToken'))
   }
 
-  user
-    .auth0login(req.accessToken)
+  user.auth0login(req.accessToken)
     .then(user.generateTokens)
     .then(response => {
       res.send(response)

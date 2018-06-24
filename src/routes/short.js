@@ -5,8 +5,7 @@ const generators = require('../managers/generators')
 const router = express.Router()
 
 router.get('/rg/:id', (req, res, next) => {
-  generators
-    .findById(req.params.id)
+  generators.findById(req.params.id)
     .then(generator => {
       if (!generator) {
         return next(new errors.NotFoundError('Generator not found'))

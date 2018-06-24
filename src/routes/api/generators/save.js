@@ -11,14 +11,8 @@ module.exports = (req, res, next) => {
     picture: req.user.profile.picture
   }
   let data = {}
-  const table = pick(req.body, [
-    'name',
-    'desc',
-    'data.tables',
-    'data.tpls',
-    'data.alias'
-  ])
-  const isNew = !req.params.id
+  const table = pick(req.body, ['name', 'desc', 'data.tables', 'data.tpls', 'data.alias'])
+  const isNew = !(req.params.id)
 
   if (isNew) {
     data = merge({ author }, table)
@@ -27,8 +21,7 @@ module.exports = (req, res, next) => {
     data = req.isAdmin ? table : merge({ author }, table)
   }
 
-  generators
-    .save(req.params.id, data)
+  generators.save(req.params.id, data)
     .then(saved => {
       if (!saved) {
         return next(new errors.InternalServerError('Error during save'))

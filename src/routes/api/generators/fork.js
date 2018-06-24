@@ -9,8 +9,7 @@ module.exports = (req, res, next) => {
     picture: req.user.profile.picture
   }
 
-  generators
-    .fork(req.params.id, { author })
+  generators.fork(req.params.id, { author })
     .then(forked => {
       if (!forked) {
         return next(new errors.InternalServerError('Error during save'))

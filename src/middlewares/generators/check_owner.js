@@ -7,11 +7,10 @@ module.exports = (req, res, next) => {
     return next()
   }
 
-  generators
-    .checkOwner(req.user, req.params.id)
+  generators.checkOwner(req.user, req.params.id)
     .then(isOwner => {
       if (!isOwner) {
-        return next(new errors.UnauthorizedError("Can't modify this generator"))
+        return next(new errors.UnauthorizedError('Can\'t modify this generator'))
       }
     })
     .then(() => next())

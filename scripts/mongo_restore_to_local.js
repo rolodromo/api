@@ -1,4 +1,3 @@
-
 const restore = require('mongodb-restore')
 
 module.exports = (dbUri, dbName) => new Promise((resolve, reject) => {

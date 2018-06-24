@@ -18,7 +18,9 @@ const mailer = nodemailer.createTransport(transport(sendgridConf))
 module.exports = inOpts => {
   const options = merge({}, DEFAULT_OPTIONS, inOpts)
 
-  return mailer.sendMail(options).catch(err => {
-    console.log(err)
-  })
+  return mailer
+    .sendMail(options)
+    .catch(err => {
+      console.log(err)
+    })
 }
