@@ -17,6 +17,7 @@ const schema = {
 
     },
     parent: 'string',
+    listed: 'boolean',
     featured: 'boolean',
     data: {
       type: 'object',

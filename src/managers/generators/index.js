@@ -77,6 +77,7 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
   const time = inputId ? 'updatedAt' : 'createdAt'
   data[time] = new Date()
   data.slug = slugify(data.name)
+  data.listed = !!(inputData.listed)
 
   return generators
     .findOneAndUpdate({

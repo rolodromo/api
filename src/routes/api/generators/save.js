@@ -11,7 +11,7 @@ module.exports = (req, res, next) => {
     picture: req.user.profile.picture
   }
   let data = {}
-  const table = pick(req.body, ['name', 'desc', 'data.tables', 'data.tpls', 'data.alias'])
+  const table = pick(req.body, ['name', 'desc', 'listed', 'data.tables', 'data.tpls', 'data.alias'])
   const isNew = !(req.params.id)
 
   if (isNew) {
