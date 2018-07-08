@@ -11,11 +11,19 @@ module.exports = (req, res, next) => {
     picture: req.user.profile.picture
   }
   let data = {}
-  const table = pick(req.body, ['name', 'desc'])
   const isNew = !(req.params.id)
+  const pickProps =['name', 'desc', 'items']
+  if (isNew) {
+    pickProps.push(['type'])
+  }
+  const table = pick(req.body, pickProps)
 
   if (isNew) {
-    data = merge({ author }, table)
+    data = merge({ author }, {
+      ...table,
+      type: req.params.type,
+      length: Object.keys(table.items).length
+    })
   } else {
     // Do NOT modify author data if current user isAdmin
     data = req.isAdmin ? table : merge({ author }, table)

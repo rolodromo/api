@@ -35,6 +35,12 @@ const findAll = () => userColl.find({
   deleted: dontExists
 }, listOpts).then(prepareList)
 
+const findByType = (type) => userColl.find({
+  type,
+  listed: true,
+  deleted: dontExists
+}, listOpts).then(prepareList)
+
 const findOwn = (userId) => userColl.find({
   'author.id': userId,
   listed: true,
@@ -121,6 +127,7 @@ const saveItems = (id, saveData = {}, removeData = []) => {
 
 module.exports = {
   findAll,
+  findByType,
   findOwn,
   findById,
   save,

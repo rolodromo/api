@@ -6,6 +6,10 @@ const schema = {
   properties: {
     name: 'string',
     desc: 'string',
+    type: {
+      type: 'string',
+      enum: ['sounds', 'generators', 'dice', 'text']
+    },
     author: {
       type: 'object',
       properties: {

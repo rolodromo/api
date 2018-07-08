@@ -3,7 +3,7 @@ const mailer = require('../mailer')
 
 module.exports = collection => {
   mailer({
-    subject: `[ROLEANDO] coleccion "${collection.name}" (${process.env.NODE_ENV})`, // eslint-disable-line no-process-env
+    subject: `[ROLODROMO] coleccion "${collection.name}" (${process.env.NODE_ENV})`, // eslint-disable-line no-process-env
     text: formatText(collection)
   })
 }
