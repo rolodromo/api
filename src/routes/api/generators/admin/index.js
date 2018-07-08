@@ -25,10 +25,21 @@ const setListed = status => (req, res, next) => {
     .catch(next)
 }
 
+const listHidden = (req, res, next) => {
+  generators.findUnlisted()
+    .then(list => {
+      res.send(list)
+    })
+    .catch(next)
+}
+
+
 router.put('/featured/:id', setFeatured(true))
 router.delete('/featured/:id', setFeatured(false))
 
 router.put('/listed/:id', setListed(true))
 router.delete('/listed/:id', setListed(false))
+
+router.get('/hidden', listHidden)
 
 module.exports = router

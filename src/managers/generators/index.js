@@ -46,7 +46,6 @@ const findNames = () => generators.find({
 
 const findOwn = (userId) => generators.find({
   'author.id': userId,
-  listed: true,
   deleted: dontExists
 }, listOpts).then(prepareList)
 
@@ -59,6 +58,11 @@ const findLikes = (userId) => generators.find({
 const findFeatured = () => generators.find({
   listed: true,
   featured: true,
+  deleted: dontExists
+}, listOpts).then(prepareList)
+
+const findUnlisted = () => generators.find({
+  listed: false,
   deleted: dontExists
 }, listOpts).then(prepareList)
 
@@ -148,6 +152,7 @@ module.exports = {
   findOwn,
   findLikes,
   findFeatured,
+  findUnlisted,
   save,
   fork,
   remove,
