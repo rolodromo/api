@@ -5,6 +5,7 @@ const {
   HOST,
   MAIL_RECIPIENT,
   MONGODB_URI,
+  MONGO_URL,
   TOKEN_SECRET,
   ADMIN_USERS,
   AUTH0_DOMAIN,
@@ -19,7 +20,7 @@ module.exports = {
   host: HOST,
   mailRecipient: MAIL_RECIPIENT,
   database: {
-    url: MONGODB_URI
+    url: MONGO_URL || MONGODB_URI
   },
   auth: {
     token: {
