@@ -8,7 +8,8 @@
     "dev": "babel-node src/start.js",
     "build": "babel src --out-dir lib",
     "lint": "eslint src config bin scripts",
-    "lint-fix": "npm run lint -- --fix"
+    "lint-fix": "npm run lint -- --fix",
+    "mongo-copy": "node bin/heroku_to_local"
   },
   "keywords": [],
   "author": "",
