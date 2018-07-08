@@ -3,7 +3,7 @@ import express from 'express'
 const router = express.Router()
 
 const sitemap = sm.createSitemap({
-  hostname: 'https://roleando.herokuapp.com',
+  hostname: 'https://rolodromo.com',
   cacheTime: 86400000, // 86400 sec - cache purge period
   urls: [
     { url: '/rolodromo/', changefreq: 'weekly', priority: 0.5 },

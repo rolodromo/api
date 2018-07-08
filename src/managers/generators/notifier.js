@@ -4,7 +4,7 @@ const mailer = require('../mailer')
 module.exports = generator => {
   const status = generator.parent ? 'copiado' : 'nuevo'
   mailer({
-    subject: `[ROLEANDO] generador ${status} "${generator.name}" (${process.env.NODE_ENV})`, // eslint-disable-line no-process-env
+    subject: `[ROLODROMO] generador ${status} "${generator.name}" (${process.env.NODE_ENV})`, // eslint-disable-line no-process-env
     text: formatText(generator)
   })
 }
