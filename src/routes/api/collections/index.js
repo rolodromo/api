@@ -22,11 +22,11 @@ router.get('/sounds', validateToken(), findByType('sounds'))
 router.get('/generators', validateToken(), findByType('generators'))
 router.get('/dice', validateToken(), findByType('dice'))
 
-router.post('/:type', validateToken(), save)
+router.post('/:type', mandatoryToken(), save)
 
 // single collection
 router.get('/:id', validateToken(), findOne)
-router.put('/:id', validateToken(), checkOwner, save)
+router.put('/:id', mandatoryToken(), checkOwner, save)
 router.delete('/:id', mandatoryToken(), checkOwner, remove)
 
 // items
