@@ -9,7 +9,7 @@ const unset = require('lodash/unset')
 const validate = require('./validator')
 const link = require('./link')
 const db = require('../db')
-const addChildrenTables = require('./add_children_tables')
+const addChildrenAggragate = require('./aggregate_subtables')
 
 const DEFAULT_DATA = {
   listed: true,
@@ -69,7 +69,7 @@ const findUnlisted = () => generators.find({
 const findById = id => {
   return generators
     .findOne({ id, deleted: dontExists })
-    .then(addChildrenTables)
+    .then(addChildrenAggragate)
     .then(prepare)
 }
 

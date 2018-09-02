@@ -1,4 +1,4 @@
-const { has, find, filter, merge } = require('lodash')
+const { flatMap, pick, has } = require('lodash')
 const db = require('../db')
 
 const generators = db.get('generator_tables')
@@ -53,9 +53,8 @@ module.exports = (main) => {
     }
   ])
     .then(list => {
-      if (!list) return main
-
-      return addFlattenAliases(main, list)
+      main.children = formatChildren(main, list)
+      return main
     })
     .catch(err => {
       console.log(err)
@@ -63,22 +62,25 @@ module.exports = (main) => {
     })
 }
 
-const addFlattenAliases = (main, list) => {
-  const map = mapAliases(Object.keys(main.data.alias), main.data.alias, list)
+const formatChildren = (main, list) => {
 
-  main.data.children = filter(list, 'alias')
-    .reduce((final, curr) => {
-      if (!curr.alias) return final
+  const gens = list.reduce((acc, curr) => {
+    acc[curr.id] = curr
+    return acc
+  }, {})
 
-      return merge(final, mapAliases(Object.keys(curr.alias), curr.alias, list))
-    }, map)
-
-  return main
+  return objToArray(main.data.alias)
+    .concat(flatMap(list.filter(x => x.alias).map(x => objToArray(x.alias))))
+    .reduce((acc, curr) => {
+      acc[curr.alias] = pick(gens[curr.id], ['tpls', 'tables'])
+      return acc
+    }, {})
 }
 
-const mapAliases = (keys, alias, list) => {
-  return keys.reduce((final, curr) => {
-    final[curr] = find(list, item => item.id === alias[curr])
-    return final
-  }, {})
+const objToArray = obj => {
+  if (!obj) return []
+
+  return Object.keys(obj).map(key => {
+    return { alias: key, id: obj[key] }
+  })
 }

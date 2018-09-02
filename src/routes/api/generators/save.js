@@ -12,6 +12,7 @@ module.exports = (req, res, next) => {
   }
   let data = {}
   const table = pick(req.body, ['name', 'desc', 'listed', 'data.tables', 'data.tpls', 'data.alias'])
+  table.data.remotes = Object.values(table.data.alias||{})
   const isNew = !(req.params.id)
 
   if (isNew) {
