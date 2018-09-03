@@ -1,10 +1,6 @@
 const shortid = require('shortid')
 const slug = require('slug')
-const merge = require('lodash/merge')
-const clone = require('lodash/clone')
-const map = require('lodash/map')
-const partialRight = require('lodash/partialRight')
-const unset = require('lodash/unset')
+const { omit, clone, map, partialRight, merge } = require('lodash')
 
 const validate = require('./validator')
 const link = require('./link')
@@ -20,13 +16,17 @@ const dontExists = { $exists: false }
 const generators = db.get('generator_tables')
 const slugify = str => slug((str || '').toLowerCase())
 
-const prepare = table => {
-  if (!table) return
+const prepare = obj => {
+  if (!obj) return
 
-  unset(table, ['_id', 'listed', 'deleted'])
+  const table = omit(obj, ['_id', 'listed', 'deleted'])
+
+  table.children = obj.children || {}
   return link(table)
 }
+
 const prepareList = partialRight(map, prepare)
+
 const listOpts = {
   fields: { data: 0 },
   sort: { createdAt: -1 }
@@ -65,6 +65,18 @@ const findUnlisted = () => generators.find({
   listed: false,
   deleted: dontExists
 }, listOpts).then(prepareList)
+
+const findTwittable = () => generators.find({
+  twittable: true,
+  deleted: dontExists
+}, {
+  fields: {
+    _id: 0,
+    id: 1,
+    name: 1
+  },
+  sort: { createdAt: -1 }
+})
 
 const findById = id => {
   return generators
@@ -153,6 +165,7 @@ module.exports = {
   findLikes,
   findFeatured,
   findUnlisted,
+  findTwittable,
   save,
   fork,
   remove,

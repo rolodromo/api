@@ -4,7 +4,6 @@ const db = require('../db')
 const generators = db.get('generator_tables')
 
 module.exports = (main) => {
-  main.children = {}
   if (!main || !has(main, 'data.alias')) return main
 
   return generators.aggregate([
