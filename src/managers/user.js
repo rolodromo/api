@@ -1,4 +1,4 @@
-import { get, pick } from 'lodash'
+import { pick } from 'lodash'
 import config from '../../config'
 
 const db = require('./db')

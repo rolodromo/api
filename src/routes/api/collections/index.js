@@ -18,8 +18,8 @@ const router = express.Router()
 router.use(cors())
 
 router.get('/', validateToken(), findAll)
-router.get('/sounds', validateToken(), findByType('sounds'))
-router.get('/generators', validateToken(), findByType('generators'))
+router.get('/sound', validateToken(), findByType('sound'))
+router.get('/generator', validateToken(), findByType('generator'))
 router.get('/dice', validateToken(), findByType('dice'))
 
 router.post('/:type', mandatoryToken(), save)

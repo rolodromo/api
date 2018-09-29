@@ -8,7 +8,7 @@ const schema = {
     desc: 'string',
     type: {
       type: 'string',
-      enum: ['sounds', 'generators', 'dice', 'text']
+      enum: ['sound', 'generator', 'dice', 'text']
     },
     author: {
       type: 'object',
