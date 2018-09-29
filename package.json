@@ -15,12 +15,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@rolodromo/rpgen": "1.2.2",
     "auth0-js": "9.6.1",
     "body-parser": "1.18.3",
     "cors": "2.8.4",
     "dotenv": "6.0.0",
     "express": "4.16.3",
     "express-jwt": "5.3.1",
+    "http-status": "1.2.0",
     "jsonwebtoken": "8.3.0",
     "lodash": "4.17.10",
     "monk": "6.0.6",
@@ -31,7 +33,9 @@
     "shortid": "2.2.13",
     "sitemap": "2.0.1",
     "slug": "0.9.1",
-    "tv4": "1.3.0"
+    "striptags": "3.1.1",
+    "tv4": "1.3.0",
+    "twit": "2.2.11"
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",

@@ -11,7 +11,7 @@ const DEFAULT_DATA = {
   listed: true,
   featured: false
 }
-const dontExists = { $exists: false }
+const notDeleted = { deleted: { $exists: false } }
 
 const generators = db.get('generator_tables')
 const slugify = str => slug((str || '').toLowerCase())
@@ -34,11 +34,11 @@ const listOpts = {
 
 const findAll = () => generators.find({
   listed: true,
-  deleted: dontExists
+  ...notDeleted
 }, listOpts).then(prepareList)
 
 const findNames = () => generators.find({
-  deleted: dontExists
+  ...notDeleted
 }, {
   fields: { name: 1, desc: 1, id: 1 },
   sort: { slug: 1 }
@@ -46,29 +46,29 @@ const findNames = () => generators.find({
 
 const findOwn = (userId) => generators.find({
   'author.id': userId,
-  deleted: dontExists
+  ...notDeleted
 }, listOpts).then(prepareList)
 
 const findLikes = (userId) => generators.find({
   likes: userId,
   listed: true,
-  deleted: dontExists
+  ...notDeleted
 }, listOpts).then(prepareList)
 
 const findFeatured = () => generators.find({
   listed: true,
   featured: true,
-  deleted: dontExists
+  ...notDeleted
 }, listOpts).then(prepareList)
 
 const findUnlisted = () => generators.find({
   listed: false,
-  deleted: dontExists
+  ...notDeleted
 }, listOpts).then(prepareList)
 
 const findTwittable = () => generators.find({
   twittable: true,
-  deleted: dontExists
+  ...notDeleted
 }, {
   fields: {
     _id: 0,
@@ -78,9 +78,23 @@ const findTwittable = () => generators.find({
   sort: { createdAt: -1 }
 })
 
+const findRandomTwittable = () => {
+  return generators
+    .aggregate([
+      {
+        $match: {
+          twittable: true,
+          ...notDeleted
+        }
+      },
+      { $sample: { size: 1 } }
+    ])
+    .then(([generator]) => prepare(generator))
+}
+
 const findById = id => {
   return generators
-    .findOne({ id, deleted: dontExists })
+    .findOne({ id, ...notDeleted })
     .then(addChildrenAggragate)
     .then(prepare)
 }
@@ -98,7 +112,7 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
   return generators
     .findOneAndUpdate({
       id,
-      deleted: dontExists
+      ...notDeleted
     }, {
       $set: data
     }, { upsert: true })
@@ -106,7 +120,7 @@ const save = (inputId, inputData) => validate(inputData).then(() => {
 })
 
 const fork = (id, author) => {
-  return generators.findOne({ id, deleted: dontExists })
+  return generators.findOne({ id, ...notDeleted })
     .then(parent => {
       if (!parent) {
         return
@@ -166,6 +180,7 @@ module.exports = {
   findFeatured,
   findUnlisted,
   findTwittable,
+  findRandomTwittable,
   save,
   fork,
   remove,

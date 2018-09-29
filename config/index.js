@@ -8,10 +8,15 @@ const {
   MONGO_URL,
   TOKEN_SECRET,
   ADMIN_USERS,
+  AUTH_ADMIN_INTERNAL_TOKEN,
   AUTH0_DOMAIN,
   AUTH0_CLIENT_ID,
   SENDGRID_USERNAME,
-  SENDGRID_PASSWORD
+  SENDGRID_PASSWORD,
+  BOT_CONSUMER_KEY,
+  BOT_CONSUMER_SECRET,
+  BOT_ACCESS_TOKEN,
+  BOT_ACCESS_TOKEN_SECRET
 } = process.env // eslint-disable-line no-process-env
 
 module.exports = {
@@ -23,6 +28,7 @@ module.exports = {
     url: MONGO_URL || MONGODB_URI
   },
   auth: {
+    adminToken: AUTH_ADMIN_INTERNAL_TOKEN,
     token: {
       secret: TOKEN_SECRET,
       audience: 'api.rolodromo.com',
@@ -43,5 +49,12 @@ module.exports = {
   sendgrid: {
     user: SENDGRID_USERNAME,
     pass: SENDGRID_PASSWORD
+  },
+  twitter: {
+    consumer_key: BOT_CONSUMER_KEY,
+    consumer_secret:BOT_CONSUMER_SECRET,
+    access_token: BOT_ACCESS_TOKEN,
+    access_token_secret: BOT_ACCESS_TOKEN_SECRET,
+    screen_name: 'roleandobot'
   }
 }
