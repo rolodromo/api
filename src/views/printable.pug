@@ -1,0 +1,138 @@
+doctype html
+head
+  meta(charset='utf-8')
+  title A4
+  // Normalize or reset CSS with your favorite library
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css')
+  // Load paper.css for happy printing
+  link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css')
+  script( src='https://zeptojs.com/zepto.min.js')
+  // Set page size here: A5, A4 or A3
+  // Set also "landscape" if you need
+  style.
+    .subpage {
+      padding: 0.2cm;
+      border: 5px red solid;
+      border-radius: 10px;
+      outline: 0;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      height: 100%;
+    }
+    .card {
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      width: calc(25% - 0.2cm);
+      height: calc(25% - 0.2cm);
+
+      position: relative;
+    }
+    .card.frame1 {
+      background-image: url("https://media-dominaria.cursecdn.com/attachments/14/436/635032476683723169.png");
+      margin: 0.1cm;
+      font-size: 0.2cm;
+    }
+
+    .frame1 .title {
+      margin-left: 5.5%;
+      margin-right: 5.5%;
+      margin-top: 7.5%;
+      height: 5%;
+      /*border: 1px solid #F00;*/
+      font-weight: bold;
+      padding: 0.01cm;
+      padding-left: 0.08cm;
+      text-wrap: none;
+      line-height: 2em;
+      vertical-align: text-bottom;
+      position: relative;
+    }
+
+    .title:first-letter {
+      text-transform: uppercase;
+    }
+    .frame1 .box {
+      margin-left: 10%;
+      margin-right: 10%;
+      margin-top: 18%;
+      height:55%;
+      padding: 0.05cm;
+      overflow: hidden;
+      font-size: 2.55em;
+      text-align: justify;
+    }
+
+    .card.frame2 {
+      background-image: url("https://melbournechapter.net/images/design-clipart-box-2.png");
+      background-size: contain;
+      width: 9.3cm;
+      height: 4.9cm;
+      /*border: 1px solid #000;*/
+      margin: 0.02cm;
+      margin-left: 0.1cm;
+    }
+    .frame2 .box {
+      padding: 0.03cm;
+      font-size: 1.3em;
+      line-height: 1.4em;
+      height: 70%;
+      margin-left: 2%;
+      margin-right: 2%;
+      text-align: center;
+      word-wrap: normal;
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      overflow: hidden;
+    }
+
+// Set "A5", "A4" or "A3" for class name
+// Set also "landscape" if you need
+// Each sheet element should have the class "sheet"
+// "padding-**mm" is optional: you can set 10, 15, 20 or 25
+body.A4.page.landscape
+  each page in pages
+    section.sheet.subpage
+      div.container
+        each quote in page
+          div.card.frame2
+            //div.title.resize= quote.substr(10,55)
+            div.box.resize!= quote
+
+script.
+  (function () {
+    var autoSizeText;
+
+    autoSizeText = function () {
+      var el, elements, _i, _len, _results;
+      elements = $('.box,.title');
+      console.log(elements);
+      if (elements.length < 0) {
+        return;
+      }
+      _results = [];
+      for (_i = 0, _len = elements.length; _i < _len; _i++) {
+        el = elements[_i];
+        _results.push((function (el) {
+          var resizeText, _results1;
+          resizeText = function () {
+            var elNewFontSize;
+            elNewFontSize = (parseInt($(el).css('font-size').slice(0, -2)) - 0.1) + 'px';
+            return $(el).css('font-size', elNewFontSize);
+          };
+          _results1 = [];
+          while (el.scrollHeight > el.offsetHeight) {
+            _results1.push(resizeText());
+          }
+          return _results1;
+        })(el));
+      }
+      return _results;
+    };
+    autoSizeText()
+
+  }).call(this);

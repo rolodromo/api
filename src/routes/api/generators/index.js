@@ -14,6 +14,8 @@ const addLike = require('./likes/add')
 const removeLike = require('./likes/remove')
 const findOne = require('./find_one')
 const pregenerated = require('./pre_generated')
+const print = require('./printable')
+
 const save = require('./save')
 const fork = require('./fork')
 const remove = require('./remove')
@@ -31,6 +33,7 @@ router.get('/tables/twitter', useCors, validateToken(), listTwittable)
 
 router.get('/table/:id', useCors, validateToken(), findOne)
 router.get('/table/:id/pregenerated', useCors, validateToken(), pregenerated)
+router.get('/table/:id/print', useCors, validateToken(), print)
 
 router.post('/tables', mandatoryToken(), save)
 router.post('/table/:id/fork', mandatoryToken(), fork)
