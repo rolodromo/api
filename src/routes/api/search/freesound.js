@@ -9,7 +9,7 @@ const PAGE_SIZE = 100
 
 module.exports = async (req, res, next) => {
   try {
-    const { q: query, minDuration, maxDuration, sort, pageSize } = req.query
+    const { query, minDuration, maxDuration, sort, pageSize } = req.query
 
     const qs = {
       query,
