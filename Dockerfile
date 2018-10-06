@@ -9,9 +9,9 @@ COPY .babelrc ./
 COPY src ./src
 COPY config ./config
 
-RUN npm install && npm run build
+RUN npm ci && npm run build
 
-RUN rm .babelrc src -rf && npm prune --production && npm audit fix
+RUN rm .babelrc src -rf && npm prune --production
 
 ENV NODE_ENV production
 EXPOSE 3001

@@ -6,7 +6,7 @@
     "node_modules"
   ],
   "watch": [
-    "src/server",
+    "src",
     "config/",
     ".env"
   ],

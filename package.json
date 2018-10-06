@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node lib/start",
-    "dev": "babel-node $NODE_DEBUG_OPTION src/start.js",
+    "dev": "nodemon src/start.js --exec babel-node",
     "build": "babel src --out-dir lib",
     "lint": "eslint src config bin scripts",
     "lint-fix": "npm run lint -- --fix",
@@ -53,6 +53,7 @@
     "eslint-plugin-standard": "4.0.0",
     "mongodb-backup": "1.6.9",
     "mongodb-restore": "1.6.2",
+    "nodemon": "1.18.4",
     "prettier": "1.14.3"
   }
 }

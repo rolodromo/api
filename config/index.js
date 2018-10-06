@@ -16,13 +16,19 @@ const {
   BOT_CONSUMER_KEY,
   BOT_CONSUMER_SECRET,
   BOT_ACCESS_TOKEN,
-  BOT_ACCESS_TOKEN_SECRET
+  BOT_ACCESS_TOKEN_SECRET,
+  FREESOUND_API_KEY,
+  ENV
 } = process.env // eslint-disable-line no-process-env
 
 module.exports = {
   name: 'Rolodromo',
+  ENV,
   port: PORT,
   host: HOST,
+  search: {
+    freesoundApiKey: FREESOUND_API_KEY
+  },
   mailRecipient: MAIL_RECIPIENT,
   database: {
     url: MONGO_URL || MONGODB_URI
