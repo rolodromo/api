@@ -18,6 +18,7 @@ const {
   BOT_ACCESS_TOKEN,
   BOT_ACCESS_TOKEN_SECRET,
   FREESOUND_API_KEY,
+  PAINTER_URL,
   ENV
 } = process.env // eslint-disable-line no-process-env
 
@@ -64,5 +65,6 @@ module.exports = {
     access_token: BOT_ACCESS_TOKEN,
     access_token_secret: BOT_ACCESS_TOKEN_SECRET,
     screen_name: 'roleandobot'
-  }
+  },
+  painterUrl: PAINTER_URL
 }

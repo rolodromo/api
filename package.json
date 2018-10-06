@@ -29,6 +29,7 @@
     "nodemailer": "4.6.8",
     "nodemailer-sendgrid-transport": "0.2.0",
     "pug": "2.0.3",
+    "request": "2.88.0",
     "restify-errors": "6.1.1",
     "shortid": "2.2.13",
     "sitemap": "2.1.0",

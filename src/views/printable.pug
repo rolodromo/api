@@ -6,13 +6,14 @@ head
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css')
   // Load paper.css for happy printing
   link(rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.4.1/paper.css')
+  link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Noto+Sans|Vollkorn+SC')
   script( src='https://zeptojs.com/zepto.min.js')
   // Set page size here: A5, A4 or A3
   // Set also "landscape" if you need
   style.
     .subpage {
-      padding: 0.2cm;
-      border: 5px red solid;
+      padding: 0.1cm;
+      /*border: 5px red solid;*/
       border-radius: 10px;
       outline: 0;
     }
@@ -75,7 +76,8 @@ head
       margin: 0.02cm;
       margin-left: 0.1cm;
     }
-    .frame2 .box {
+
+    .frame2 .box, .frame3 .box {
       padding: 0.03cm;
       font-size: 1.3em;
       line-height: 1.4em;
@@ -88,7 +90,42 @@ head
       top: 50%;
       transform: translateY(-50%);
       overflow: hidden;
+      display: flex; /* create nested flex container */
+      flex-direction: column;
+      justify-content: center; /* center text horizontally */
+      align-items: stretch; /* center text vertically */
     }
+    .box p {
+      margin: 0.1em;
+      padding: 0.1em;
+    }
+
+    .card.frame3 {
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQheg7zgTKH7733nyWormT7osNU_zbKyadzghbs99ZVp4A2DaE9');
+      background-size: cover;
+      border-radius: 20px;
+      width: 6.8cm;
+      height: 4.7cm;
+      border: 0.2cm solid #000;
+      font-size: 0.5cm;
+      margin: 0.03cm;
+      margin-left: 0.1cm;
+      text-align: center;
+    }
+
+    .card.frame3 {
+      font-family: 'Noto Sans', sans-serif;
+      font-size: 0.4cm;
+
+    }
+
+    div.box:first-letter, .card .box > :first-child::first-letter {
+      font-family: 'Ultra', serif;
+      font-size: 1.5em;
+      padding-left: 1.1em;
+    }
+
+
 
 // Set "A5", "A4" or "A3" for class name
 // Set also "landscape" if you need
@@ -99,8 +136,7 @@ body.A4.page.landscape
     section.sheet.subpage
       div.container
         each quote in page
-          div.card.frame2
-            //div.title.resize= quote.substr(10,55)
+          div.card.frame3
             div.box.resize!= quote
 
 script.
