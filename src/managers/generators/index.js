@@ -89,7 +89,9 @@ const findRandomTwittable = () => {
       },
       { $sample: { size: 1 } }
     ])
-    .then(([generator]) => prepare(generator))
+    .then(([generator]) => addChildrenAggragate(generator))
+    .then(prepare)
+
 }
 
 const findById = id => {
