@@ -57,6 +57,8 @@ module.exports = {
     pass: SENDGRID_PASSWORD
   },
   twitter: {
+    maxRetries: 100,
+    tweetLength: 280,
     consumer_key: BOT_CONSUMER_KEY,
     consumer_secret:BOT_CONSUMER_SECRET,
     access_token: BOT_ACCESS_TOKEN,

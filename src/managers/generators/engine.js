@@ -3,9 +3,9 @@ import striptags from 'striptags'
 
 const config = require('../../../config')
 
-const MAX_RETRIES = config.maxRetries
+const MAX_RETRIES = config.twitter.maxRetries
 
-const isTwittable = str => str.length <= config.tweetLength
+const isTwittable = str => str.length <= config.twitter.tweetLength
 
 const generateFormatted = ({ generator, stripHeader, stripTags=true }) => {
   let cleanText = generator.generate()
@@ -43,6 +43,7 @@ const generateTwittable = ({ generator, extra, stripHeader }) => {
 
 
 const makeGenerator = (generator) => {
+  generator.children =  generator.children || {}
   const { tpls, tables } = generator.data
   const childrenNames = Object.keys(generator.children)
   let children = ''
