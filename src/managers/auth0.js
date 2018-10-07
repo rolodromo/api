@@ -1,15 +1,15 @@
-import auth0 from 'auth0-js'
+import { AuthenticationClient } from 'auth0'
 
 import config from '../../config'
 
-const client = new auth0.Authentication({
+const client = new AuthenticationClient({
   domain: config.auth0.domain,
   clientID: config.auth0.clientId
 })
 
 const getUserInfo = accessToken =>
   new Promise((resolve, reject) => {
-    client.userInfo(accessToken, (err, profile) => {
+    client.getProfile(accessToken, (err, profile) => {
       if (err) {
         return reject(err)
       }

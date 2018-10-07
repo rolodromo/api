@@ -8,15 +8,14 @@
     "dev": "nodemon src/start.js --exec babel-node",
     "build": "babel src --out-dir lib",
     "lint": "eslint src config bin scripts",
-    "lint-fix": "npm run lint -- --fix",
-    "mongo-copy": "node $NODE_DEBUG_OPTION bin/remote_to_local"
+    "lint-fix": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@rolodromo/rpgen": "1.2.2",
-    "auth0-js": "9.6.1",
+    "auth0": "2.13.0",
     "body-parser": "1.18.3",
     "cors": "2.8.4",
     "dotenv": "6.0.0",
@@ -24,7 +23,7 @@
     "express-jwt": "5.3.1",
     "http-status": "1.2.0",
     "jsonwebtoken": "8.3.0",
-    "lodash": "4.17.10",
+    "lodash": "4.17.11",
     "monk": "6.0.6",
     "ms": "2.1.1",
     "nodemailer": "4.6.8",
@@ -48,11 +47,9 @@
     "eslint-config-standard": "12.0.0",
     "eslint-plugin-import": "2.14.0",
     "eslint-plugin-node": "7.0.1",
-    "eslint-plugin-prettier": "2.7.0",
+    "eslint-plugin-prettier": "3.0.0",
     "eslint-plugin-promise": "4.0.1",
     "eslint-plugin-standard": "4.0.0",
-    "mongodb-backup": "1.6.9",
-    "mongodb-restore": "1.6.2",
     "nodemon": "1.18.4",
     "prettier": "1.14.3"
   }
