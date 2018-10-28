@@ -13,11 +13,15 @@ const generateFormatted = ({ generator, stripHeader, stripTags=true }) => {
   if (stripHeader) cleanText = cleanText.replace(/^.+<hr>/, '')
 
   if (stripTags) {
-    cleanText = striptags(cleanText, ['strong', 'span'], '\n').replace(/\n+/g, '\n').replace(/ +/g, ' ')
+    cleanText = striptags(cleanText, ['strong', 'span'], '\n')
+      .replace(/\n+/g, '\n')
+      .replace(/ +/g, ' ')
     cleanText = striptags(cleanText, [], '')
   }
 
-  return cleanText.replace(/^\n*\s*/g, '').replace(/\n*\s*$/g, '')
+  return cleanText
+    .replace(/^\n*\s*/g, '')
+    .replace(/\n*\s*$/g, '')
 }
 
 const generateTwittable = ({ generator, extra, stripHeader }) => {
@@ -39,8 +43,6 @@ const generateTwittable = ({ generator, extra, stripHeader }) => {
 
   return cleanText
 }
-
-
 
 const makeGenerator = (generator) => {
   generator.children =  generator.children || {}
