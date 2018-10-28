@@ -1,3 +1,4 @@
+const rp = require('request-promise')
 const Client = require('twit')
 
 const config = require('../../../config')
@@ -33,7 +34,36 @@ const deleteTweet = (id) => new Promise((resolve, reject) => {
   })
 })
 
+const tweetStorycubes = async () => {
+
+  const img = await rp.get({
+    uri: 'https://painter.rolodromo.com/storycubes',
+    encoding: 'base64'
+  })
+
+  T.post('media/upload', { media_data: img }, function(err, data) {
+    if (err) {
+      return Promise.reject(err)
+    }
+
+    T.post('statuses/update', {
+      status: 'Tuitea tu historia con estos #StoryCubes',
+      media_ids: [data.media_id_string]
+    }, function(err, { text, id }) {
+      if (err) {
+        return Promise.reject(err)
+      }
+
+      console.log('done', {
+        twit: text,
+        url: `https://twitter.com/roleandobot/status/${id}`
+      })
+    })
+  })
+}
+
 module.exports = {
   tweet,
+  tweetStorycubes,
   deleteTweet
 }
